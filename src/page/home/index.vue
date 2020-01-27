@@ -189,6 +189,7 @@
        * 提交地址
        */
       handleAddressSubmitClick (val) {
+        this.topicStatus = false;
         if (val) {
           this.addressStatus = false
           this.sucTxt = '提交成功';
