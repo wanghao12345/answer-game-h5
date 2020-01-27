@@ -70,11 +70,9 @@
               break;
             case "002":
               this.tip = '一个手机号只能参与一次，请关注CCN公众号其他活动';
-              this.$emit('handleCloseTip');
               break;
             case "003":
               this.tip = '答题错误过，不能参加';
-              this.$emit('handleCloseTip');
               break;
           }
           console.log(res);

@@ -86,7 +86,7 @@
         errorStatus: false,
         errorTxt: '',
         topicStatus: false,
-        phoneStatus: true,
+        phoneStatus: false,
         addressStatus: false,
         phone: '',
         ansWerNumber: 0,
