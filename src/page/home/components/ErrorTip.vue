@@ -6,9 +6,9 @@
 </template>
 
 <script>
-  import icon from '../../../assets/img/icon_right@2x.png'
+  import icon from '../../../assets/img/icon_error@2x.png'
   export default {
-    name: 'SucTip',
+    name: 'ErrorTip',
     props: {
       status: {
         type: Boolean,
@@ -31,6 +31,9 @@
       return {
         icon: icon
       }
+    },
+    mounted () {
+
     },
     methods: {
       /**

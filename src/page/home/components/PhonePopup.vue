@@ -5,10 +5,12 @@
         <div class="close-btn" @click="handleCloseTip">
           <img :src="CloseBtn" alt="CloseBtn">
         </div>
-        <div class="topic-answer-box"></div>
+        <div class="topic-answer-box">
+          <input type="text" placeholder="请输入您的手机号" v-model="phone" />
+          <p>{{tip}}</p>
+        </div>
         <div class="btn-list-box">
-          <button @click="handleSelectAClick">A:陆逊</button>
-          <button @click="handleSelectBClick">B:边让</button>
+          <button @click="handleStartAnswerClick">开始答题</button>
         </div>
       </div>
     </div>
@@ -18,7 +20,7 @@
 <script>
   import CloseBtn from '../../../assets/img/btn_close.png'
   export default {
-    name: 'TopicPopup',
+    name: 'PhonePopup',
     props: {
       status: {
         type: Boolean,
@@ -27,7 +29,9 @@
     },
     data () {
       return {
-        CloseBtn: CloseBtn
+        CloseBtn: CloseBtn,
+        tip: '一个手机号只能参与一次，请关注CCN公众号其他活动',
+        phone: ''
       }
     },
     methods: {
@@ -37,15 +41,9 @@
       /**
        * 选择A
        */
-      handleSelectAClick () {
-        this.$emit('handleSelectAnswerClick', 'A')
+      handleStartAnswerClick () {
+        this.$emit('handleStartAnswerClick')
       },
-      /**
-       * 选择B
-       */
-      handleSelectBClick () {
-        this.$emit('handleSelectAnswerClick', 'B')
-      }
     }
   }
 </script>
@@ -71,7 +69,7 @@
       .topic-main-content{
         @include wh(100%, 100%);
         position: relative;
-        background: url("../../../assets/img/pop_chulufengmang.png");
+        background: url("../../../assets/img/pop_phone.png");
         background-size: 100% 100%;
         .close-btn{
           width: 1.5rem;
@@ -86,13 +84,47 @@
         }
         .topic-answer-box{
           position: absolute;
-          @include wh(10rem, 5rem);
-          background: url("../../../assets/img/mimian1.png");
-          background-size: 100% 100%;
+          @include wh(12rem, 6rem);
           left: 50%;
           top: 50%;
-          margin-left: -5rem;
+          margin-left: -6rem;
           margin-top: -3.5rem;
+          input{
+            @include wh(100%, 3rem);
+            text-align: center;
+            background: rgba(0,0,0,0);
+            border-bottom: 2px solid #fab19d;
+            font-size: 0.9rem;
+            font-weight: 550;
+          }
+          input::-webkit-input-placeholder {
+            color: black;
+          }
+          input::-moz-input-placeholder {
+            color: black;
+          }
+          input::-ms-input-placeholder {
+            color: black;
+          }
+          p{
+            color: #bf0d00;
+            font-size: 0.6rem;
+            margin-top: 0.5rem;
+            font-weight: bold;
+            position: relative;
+            text-indent: 0.7rem;
+            line-height: 1rem;
+            &::before{
+              content: '';
+              position: absolute;
+              @include wh(0.3rem, 0.3rem);
+              display: block;
+              background: #bf0d00;
+              left: 0;
+              top: 0.3rem;
+              border-radius: 50%;
+            }
+          }
         }
         .btn-list-box{
           @include wh(100%, 3rem);
@@ -104,7 +136,7 @@
             background: #f24336;
             color: white;
             border-radius: 2rem;
-            width: 4.5rem;
+            width: 7rem;
             height: 2rem;
             margin: 0 0.5rem;
             font-size: 0.85rem;
