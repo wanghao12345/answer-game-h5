@@ -25,7 +25,7 @@
           if (val) {
             setTimeout(() => {
               this.handleCloseTip()
-            }, 2000)
+            }, 1000)
           }
         },
         immediate: true

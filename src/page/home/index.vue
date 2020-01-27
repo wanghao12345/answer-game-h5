@@ -125,6 +125,7 @@
        * 关闭地址框
        */
       handleCloseAddressTip () {
+        this.topicStatus = false;
         this.addressStatus = false
       },
       /**
@@ -172,7 +173,9 @@
        */
       updateTisRequest (phone, tis) {
         this.ansWerNumber = tis;
-        this.topicStatus = true;
+        if (tis < 9) {
+          this.topicStatus = true;
+        }
         if (tis === 9) {
           this.addressStatus = true;
           this.topicStatus = false;
@@ -210,7 +213,8 @@
           this.updateTisRequest(this.phone, 99)
           this.topicStatus = false;
           this.errorTxt = '回答错误';
-          this.errorStatus = true
+          this.errorStatus = true;
+          this.topicStatus = false;
         }
       }
     }
