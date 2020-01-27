@@ -1,5 +1,5 @@
 <template>
-  <div class="topic-popup-wrapper" v-show="status">
+  <div class="topic-popup-wrapper" v-if="status">
     <div class="topic-content-wrapper">
       <div class="topic-main-content">
         <div class="close-btn" @click="handleCloseTip">
@@ -19,6 +19,9 @@
 
 <script>
   import CloseBtn from '../../../assets/img/btn_close.png'
+
+  import { checkUser } from '@/api/home'
+  import { setStore } from '@/config/mUtils'
   export default {
     name: 'PhonePopup',
     props: {
@@ -42,7 +45,40 @@
        * 选择A
        */
       handleStartAnswerClick () {
-        this.$emit('handleStartAnswerClick')
+        if(!(/^1[3456789]\d{9}$/.test(this.phone))){
+          this.tip = '请输入正确的手机号码';
+          return;
+        }
+        checkUser(this.phone).then(res => {
+          const { code } = res
+          switch (code) {
+            case "999":
+              this.tip = '请求错误,请重新试一下';
+              break;
+            case "000":
+              setStore('answerPhoneH5', this.phone);
+              this.$emit('handleStartAnswerClick', {
+                type: '000',
+              });
+              break;
+            case "001":
+              setStore('answerPhoneH5', this.phone);
+              this.$emit('handleStartAnswerClick', {
+                type: '001',
+                data: res
+              })
+              break;
+            case "002":
+              this.tip = '一个手机号只能参与一次，请关注CCN公众号其他活动';
+              this.$emit('handleCloseTip');
+              break;
+            case "003":
+              this.tip = '答题错误过，不能参加';
+              this.$emit('handleCloseTip');
+              break;
+          }
+          console.log(res);
+        });
       },
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="suc-tip-box" v-show="status">
     <img :src="icon" alt="icon">
-    <p>您的回答正确</p>
+    <p>{{txt}}</p>
   </div>
 </template>
 
@@ -13,6 +13,10 @@
       status: {
         type: Boolean,
         default: false
+      },
+      txt: {
+        type: String,
+        default: ''
       }
     },
     watch: {

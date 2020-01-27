@@ -40,11 +40,13 @@
     <!--成功-->
     <SucTip
       :status="sucStatus"
+      :txt="sucTxt"
       @handleCloseTip="handleCloseSucTip"
     />
     <!--失败-->
     <ErrorTip
       :status="errorStatus"
+      :txt="errorTxt"
       @handleCloseTip="handleCloseErrorTip"
     />
   </div>
@@ -60,6 +62,9 @@
   import AddressPopup from './components/AddressPopup'
   import SucTip from './components/SucTip'
   import ErrorTip from './components/ErrorTip'
+
+  import { updateTis } from '@/api/home'
+  import { getStore } from '@/config/mUtils'
   export default {
     name: "Home",
     components: {
@@ -75,11 +80,17 @@
         ButtonImg: ButtonImg,
         IconImg: IconImg,
         sucStatus: false,
+        sucTxt: '',
         errorStatus: false,
+        errorTxt: '',
         topicStatus: false,
-        phoneStatus: false,
-        addressStatus: true
+        phoneStatus: true,
+        addressStatus: false,
+        phone: ''
       }
+    },
+    mounted () {
+
     },
     methods: {
       /**
@@ -116,13 +127,33 @@
        * 回答问题
        */
       handleAnswerClick () {
-        this.topicStatus = true
+        this.phoneStatus = true
       },
       /**
        * 开始答题
        */
-      handleStartAnswerClick () {
+      handleStartAnswerClick (val) {
 
+        this.phoneStatus = false
+        this.phone = getStore('answerPhoneH5')
+
+        if (val.type === '000') { // 从头开始
+          this.sucTxt = '开始答题';
+          this.sucStatus = true;
+          this.updateTisRequest(this.phone, 0)
+        }
+
+        if (val.type === '001') { // 接着开始
+          this.sucTxt = '开始接着上次的答的题继续答题';
+          this.sucStatus = true
+          this.updateTisRequest(val.data.user.phone, val.data.user.tis)
+        }
+
+      },
+      updateTisRequest (phone, tis) {
+        updateTis(phone, tis).then(res => {
+          console.log(res);
+        })
       },
       /**
        * 提交地址
