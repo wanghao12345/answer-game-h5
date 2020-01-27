@@ -21,6 +21,7 @@
 
 <script>
   import CloseBtn from '../../../assets/img/btn_close.png'
+  import { submitAddress } from '@/api/home'
   export default {
     name: 'AddressPopup',
     props: {
@@ -43,10 +44,29 @@
         this.$emit('handleCloseTip')
       },
       /**
-       * 选择A
+       * 提交
        */
       handleSubmitClick () {
-        this.$emit('handleSubmitClick')
+        if(!(/^1[3456789]\d{9}$/.test(this.phone))){
+          this.$emit('handleCheckInput', '请输入正确的手机号码');
+          return;
+        }
+        if (!this.name) {
+          this.$emit('handleCheckInput', '收件人不能为空');
+          return;
+        }
+        if (!this.address) {
+          this.$emit('handleCheckInput', '收件地址不能为空');
+          return;
+        }
+        submitAddress(this.phone, this.name, this.address).then(res => {
+          if (res.code === '000') {
+            this.$emit('handleSubmitClick', true)
+          } else {
+            this.$emit('handleSubmitClick', false)
+          }
+        })
+
       },
     }
   }

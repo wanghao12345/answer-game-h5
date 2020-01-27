@@ -7,7 +7,7 @@
         </div>
         <div class="topic-answer-box">
           <input type="text" placeholder="请输入您的手机号" v-model="phone" />
-          <p>{{tip}}</p>
+          <p v-if="tip">{{tip}}</p>
         </div>
         <div class="btn-list-box">
           <button @click="handleStartAnswerClick">开始答题</button>
@@ -33,7 +33,7 @@
     data () {
       return {
         CloseBtn: CloseBtn,
-        tip: '一个手机号只能参与一次，请关注CCN公众号其他活动',
+        tip: '',
         phone: ''
       }
     },

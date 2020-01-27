@@ -19,6 +19,7 @@
     <!--问题框-->
     <TopicPopup
       :status="topicStatus"
+      :ansWerNumber="ansWerNumber"
       @handleCloseTip="handleCloseTopicTip"
       @handleSelectAnswerClick="handleSelectAnswerClick"
     />
@@ -35,6 +36,7 @@
       :status="addressStatus"
       @handleCloseTip="handleCloseAddressTip"
       @handleSubmitClick="handleAddressSubmitClick"
+      @handleCheckInput="handleCheckInput"
     />
 
     <!--成功-->
@@ -86,7 +88,9 @@
         topicStatus: false,
         phoneStatus: true,
         addressStatus: false,
-        phone: ''
+        phone: '',
+        ansWerNumber: 0,
+        answer: ['A','A','B', 'B','B', 'A', 'A', 'B', 'A']
       }
     },
     mounted () {
@@ -130,6 +134,13 @@
         this.phoneStatus = true
       },
       /**
+       * 地址输入检查
+       */
+      handleCheckInput (val) {
+        this.errorTxt = val;
+        this.errorStatus = true
+      },
+      /**
        * 开始答题
        */
       handleStartAnswerClick (val) {
@@ -144,13 +155,29 @@
         }
 
         if (val.type === '001') { // 接着开始
-          this.sucTxt = '开始接着上次的答的题继续答题';
-          this.sucStatus = true
+          if (val.data.user.tis === 0) {
+            this.sucTxt = '开始接着上次的答的题继续答题';
+          } else if (val.data.user.tis === 9) {
+            this.sucTxt = '答题已经完成，请填写收件地址';
+          } else {
+            this.sucTxt = '开始接着上次的答的题继续答题';
+          }
+          this.sucStatus = true;
           this.updateTisRequest(val.data.user.phone, val.data.user.tis)
         }
 
       },
+      /**
+       * 更新题目
+       */
       updateTisRequest (phone, tis) {
+        this.ansWerNumber = tis;
+        this.topicStatus = true;
+        if (tis === 9) {
+          this.addressStatus = true;
+          this.topicStatus = false;
+        }
+
         updateTis(phone, tis).then(res => {
           console.log(res);
         })
@@ -158,18 +185,31 @@
       /**
        * 提交地址
        */
-      handleAddressSubmitClick () {
-        this.addressStatus = false
+      handleAddressSubmitClick (val) {
+        if (val) {
+          this.addressStatus = false
+          this.sucTxt = '提交成功';
+          this.sucStatus = true;
+        } else {
+          this.addressStatus = true
+          this.sucTxt = '提交失败，请重试';
+          this.sucStatus = true;
+        }
       },
       /**
        * 选择答案
        */
       handleSelectAnswerClick (val) {
-        if (val === 'A') {
-          this.sucStatus = true
-        }
-
-        if (val === 'B') {
+        const index = this.ansWerNumber
+        const value = this.answer[index]
+        if (value === val) { // 正确
+          this.updateTisRequest(this.phone, index + 1)
+          this.sucTxt = '恭喜你回答正确';
+          this.sucStatus = true;
+        } else { // 错误
+          this.updateTisRequest(this.phone, 99)
+          this.topicStatus = false;
+          this.errorTxt = '回答错误';
           this.errorStatus = true
         }
       }

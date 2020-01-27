@@ -19,3 +19,12 @@ export const updateTis = (phone, tis) => axios({
   url: `/202001Yx/updateTis.do?phone=${phone}&tis=${tis}`
 })
 
+/**
+ * 更新题目
+ */
+export const submitAddress = (phone, name, address ) => axios({
+  method: 'get',
+  url: `/202001Yx/submit.do?phone=${phone}&name=${name}&address=${address}`
+})
+
+
