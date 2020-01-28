@@ -18,6 +18,7 @@
     >
     <!--问题框-->
     <TopicPopup
+      v-if="topicStatus"
       :status="topicStatus"
       :ansWerNumber="ansWerNumber"
       @handleCloseTip="handleCloseTopicTip"
@@ -26,6 +27,7 @@
 
     <!--手机框-->
     <PhonePopup
+      v-if="phoneStatus"
       :status="phoneStatus"
       @handleCloseTip="handleClosePhoneTip"
       @handleStartAnswerClick="handleStartAnswerClick"
@@ -33,6 +35,7 @@
 
     <!--地址框-->
     <AddressPopup
+      v-if="addressStatus"
       :status="addressStatus"
       @handleCloseTip="handleCloseAddressTip"
       @handleSubmitClick="handleAddressSubmitClick"
@@ -41,12 +44,14 @@
 
     <!--成功-->
     <SucTip
+      v-if="sucStatus"
       :status="sucStatus"
       :txt="sucTxt"
       @handleCloseTip="handleCloseSucTip"
     />
     <!--失败-->
     <ErrorTip
+      v-if="errorStatus"
       :status="errorStatus"
       :txt="errorTxt"
       @handleCloseTip="handleCloseErrorTip"
@@ -87,7 +92,7 @@
         errorTxt: '',
         topicStatus: false,
         phoneStatus: false,
-        addressStatus: false,
+        addressStatus: true,
         phone: '',
         ansWerNumber: 0,
         answer: ['A','A','B', 'B','B', 'A', 'A', 'B', 'A']
@@ -172,14 +177,17 @@
        * 更新题目
        */
       updateTisRequest (phone, tis) {
-        this.ansWerNumber = tis;
+
         if (tis < 9) {
+          this.ansWerNumber = tis;
           this.topicStatus = true;
-        }
-        if (tis === 9) {
+        } else if (tis === 9) {
           this.addressStatus = true;
           this.topicStatus = false;
+        } else {
+          this.topicStatus = false;
         }
+
 
         updateTis(phone, tis).then(res => {
           console.log(res);
@@ -211,6 +219,7 @@
           this.sucTxt = '恭喜你回答正确';
           this.sucStatus = true;
         } else { // 错误
+          this.topicStatus = false;
           this.updateTisRequest(this.phone, 99)
           this.topicStatus = false;
           this.errorTxt = '回答错误';

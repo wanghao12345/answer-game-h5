@@ -7,7 +7,6 @@
         </div>
         <div class="topic-answer-box">
           <p>恭喜您！全对！请在此填写正确的收件地址，工作人员将与您联系，寄送礼包。</p>
-          <input type="text" placeholder="请输入您的手机号" v-model="phone" />
           <input type="text" placeholder="收件人" v-model="name" />
           <input type="text" placeholder="收件地址" v-model="address" />
         </div>
@@ -22,6 +21,7 @@
 <script>
   import CloseBtn from '../../../assets/img/btn_close.png'
   import { submitAddress } from '@/api/home'
+  import { getStore } from '@/config/mUtils'
   export default {
     name: 'AddressPopup',
     props: {
@@ -47,10 +47,6 @@
        * 提交
        */
       handleSubmitClick () {
-        if(!(/^1[3456789]\d{9}$/.test(this.phone))){
-          this.$emit('handleCheckInput', '请输入正确的手机号码');
-          return;
-        }
         if (!this.name) {
           this.$emit('handleCheckInput', '收件人不能为空');
           return;
@@ -59,6 +55,7 @@
           this.$emit('handleCheckInput', '收件地址不能为空');
           return;
         }
+        this.phone = getStore('answerPhoneH5')
         submitAddress(this.phone, this.name, this.address).then(res => {
           if (res.code === '000') {
             this.$emit('handleSubmitClick', true)
@@ -84,7 +81,7 @@
     background: rgba(0,0,0,0.5);
     z-index: 5;
     .topic-content-wrapper{
-      @include wh(16rem, 24rem);
+      @include wh(16rem, 20rem);
       position: absolute;
       left: 50%;
       top: 50%;
@@ -112,7 +109,7 @@
           left: 50%;
           top: 50%;
           margin-left: -6rem;
-          margin-top: -5.5rem;
+          margin-top: -4.5rem;
           input{
             @include wh(100%, 3rem);
             text-align: center;

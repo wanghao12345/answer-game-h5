@@ -33,7 +33,7 @@
     data () {
       return {
         CloseBtn: CloseBtn,
-        tip: '',
+        tip: '一个手机号只能参与一次，请关注CCN公众号其他活动',
         phone: ''
       }
     },
@@ -94,7 +94,7 @@
     background: rgba(0,0,0,0.5);
     z-index: 5;
     .topic-content-wrapper{
-      @include wh(16rem, 14rem);
+      @include wh(16rem, 12rem);
       position: absolute;
       left: 50%;
       top: 50%;
@@ -163,7 +163,7 @@
         .btn-list-box{
           @include wh(100%, 3rem);
           position: absolute;
-          bottom: 1rem;
+          bottom: 0.2rem;
           display: flex;
           justify-content: center;
           button{
