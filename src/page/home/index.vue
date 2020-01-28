@@ -92,7 +92,7 @@
         errorTxt: '',
         topicStatus: false,
         phoneStatus: false,
-        addressStatus: true,
+        addressStatus: false,
         phone: '',
         ansWerNumber: 0,
         answer: ['A','A','B', 'B','B', 'A', 'A', 'B', 'A']
