@@ -236,7 +236,8 @@
   .home-wrapper{
     @include wh(100%, 100%);
     background: url("../../assets/img/img_bg.png");
-    background-size: 100% 100%;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
     position: relative;
     .bottom-img-box{
       position: absolute;

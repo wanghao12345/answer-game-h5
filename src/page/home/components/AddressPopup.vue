@@ -7,6 +7,7 @@
         </div>
         <div class="topic-answer-box">
           <p>恭喜您！全对！请在此填写正确的收件地址，工作人员将与您联系，寄送礼包。</p>
+          <input type="text" placeholder="电话号码" v-model="phone" />
           <input type="text" placeholder="收件人" v-model="name" />
           <input type="text" placeholder="收件地址" v-model="address" />
         </div>
@@ -38,6 +39,9 @@
         name: '',
         address: ''
       }
+    },
+    mounted () {
+      this.phone = getStore('answerPhoneH5')
     },
     methods: {
       handleCloseTip () {
@@ -81,11 +85,11 @@
     background: rgba(0,0,0,0.5);
     z-index: 5;
     .topic-content-wrapper{
-      @include wh(16rem, 20rem);
+      @include wh(16rem, 23rem);
       position: absolute;
       left: 50%;
       top: 50%;
-      margin-top: -12rem;
+      margin-top: -11.5rem;
       margin-left: -8rem;
       .topic-main-content{
         @include wh(100%, 100%);
@@ -109,7 +113,7 @@
           left: 50%;
           top: 50%;
           margin-left: -6rem;
-          margin-top: -4.5rem;
+          margin-top: -5.5rem;
           input{
             @include wh(100%, 3rem);
             text-align: center;

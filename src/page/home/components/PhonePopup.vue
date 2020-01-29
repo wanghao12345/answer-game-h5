@@ -94,11 +94,11 @@
     background: rgba(0,0,0,0.5);
     z-index: 5;
     .topic-content-wrapper{
-      @include wh(16rem, 12rem);
+      @include wh(16rem, 15rem);
       position: absolute;
       left: 50%;
       top: 50%;
-      margin-top: -9rem;
+      margin-top: -7.5rem;
       margin-left: -8rem;
       .topic-main-content{
         @include wh(100%, 100%);

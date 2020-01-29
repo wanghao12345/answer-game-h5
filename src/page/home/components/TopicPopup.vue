@@ -142,7 +142,7 @@
     background: rgba(0,0,0,0.5);
     z-index: 5;
     .topic-content-wrapper{
-      @include wh(16rem, 14rem);
+      @include wh(16rem, 15rem);
       position: absolute;
       left: 50%;
       top: 50%;
