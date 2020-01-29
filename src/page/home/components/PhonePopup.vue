@@ -146,7 +146,7 @@
             margin-top: 0.5rem;
             font-weight: bold;
             position: relative;
-            text-indent: 0.7rem;
+            text-indent: 0.5rem;
             line-height: 1rem;
             &::before{
               content: '';
@@ -155,8 +155,8 @@
               display: block;
               background: #bf0d00;
               left: 0;
-              top: 0.3rem;
-              border-radius: 50%;
+              top: 0.25rem;
+              border-radius: 5rem;
             }
           }
         }

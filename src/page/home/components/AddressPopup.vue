@@ -7,7 +7,7 @@
         </div>
         <div class="topic-answer-box">
           <p>恭喜您！全对！请在此填写正确的收件地址，工作人员将与您联系，寄送礼包。</p>
-          <input type="text" placeholder="电话号码" v-model="phone" />
+          <input type="text" placeholder="电话号码" v-model="phone" disabled />
           <input type="text" placeholder="收件人" v-model="name" />
           <input type="text" placeholder="收件地址" v-model="address" />
         </div>
@@ -137,7 +137,7 @@
             margin-top: 0.5rem;
             font-weight: bold;
             position: relative;
-            text-indent: 0.7rem;
+            text-indent: 0.5rem;
             line-height: 1rem;
             &::before{
               content: '';
@@ -146,8 +146,8 @@
               display: block;
               background: #bf0d00;
               left: 0;
-              top: 0.3rem;
-              border-radius: 50%;
+              top: 0.25rem;
+              border-radius: 5rem;
             }
           }
         }
