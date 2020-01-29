@@ -130,5 +130,5 @@ input:-ms-input-placeholder { /* Internet Explorer 10-11 */
 input{
     color: #333333;
     font-size: 0.8rem;
-    font-weight: 500;
+    font-weight: 500 !important;
 }
