@@ -1,6 +1,12 @@
 /* eslint-disable require-jsdoc */
 
-class RtcClient {
+import TRTC from 'trtc-js-sdk'
+import Toast from './toastify'
+import $ from 'jquery'
+
+import { addView, removeView } from './utils'
+
+export default class RtcClient {
   constructor(options) {
     this.sdkAppId_ = options.sdkAppId;
     this.userId_ = options.userId;

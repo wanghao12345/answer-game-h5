@@ -1,6 +1,9 @@
 /* eslint-disable require-jsdoc */
 
-function addView(id) {
+import $ from 'jquery'
+import TRTC from 'trtc-js-sdk'
+
+export const addView = (id) =>{
   if (!$('#' + id)[0]) {
     $('<div/>', {
       id,
@@ -9,7 +12,7 @@ function addView(id) {
   }
 }
 
-function removeView(id) {
+export const removeView = (id) => {
   if ($('#' + id)[0]) {
     $('#' + id).remove();
   }

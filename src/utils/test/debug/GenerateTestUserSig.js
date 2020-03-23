@@ -16,7 +16,8 @@
  *
  * Reference：https://cloud.tencent.com/document/product/647/17275#Server
  */
-function genTestUserSig(userID) {
+import LibGenerateTestUserSig from '../lib-generate-test-usersig.min'
+export const genTestUserSig = (userID) => {
   /**
    * 腾讯云 SDKAppId，需要替换为您自己账号下的 SDKAppId。
    *

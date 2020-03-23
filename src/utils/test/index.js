@@ -1,5 +1,10 @@
 /* eslint-disable require-jsdoc */
 
+import $ from 'jquery'
+import { genTestUserSig } from './debug/GenerateTestUserSig'
+import RtcClient from './rtc-client'
+import Toast from './toastify'
+
 // initialize userId/roomId
 $('#userId').val('user_' + parseInt(Math.random() * 100000000));
 $('#roomId').val('889988');

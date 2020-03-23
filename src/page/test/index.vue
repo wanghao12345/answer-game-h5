@@ -18,8 +18,13 @@
                     <label for="roomId" class="bmd-label-floating">房间号:</label>
                     <input type="text" class="form-control" name="roomId" id="roomId">
                   </div>
-                  <div class="form-group bmd-form-group">
-                    <button id="join" type="button" class="btn btn-raised btn-primary rtc-primary-bg">加入房间</button>
+                  <div class="form-group bmd-form-group" style="display: flex; justify-content: space-between">
+                    <button
+                      id="join"
+                      type="button"
+                      class="btn btn-raised btn-primary rtc-primary-bg"
+                      @click="handleJoin"
+                    >加入房间</button>
                     <button id="leave" type="button" class="btn btn-raised btn-primary rtc-primary-bg">离开房间</button>
                     <button id="publish" type="button" class="btn btn-raised btn-primary rtc-primary-bg">开始推流</button>
                     <button id="unpublish" type="button" class="btn btn-raised btn-primary rtc-primary-bg">停止推流</button>
@@ -60,8 +65,25 @@
 </template>
 
 <script>
+  import RTCClient from '@/utils/rtc-client'
+  import { genTestUserSig } from '@/utils/GenerateTestUserSig'
   export default {
-    name: "index"
+    name: "index",
+    mounted() {
+
+    },
+    methods: {
+      handleJoin() {
+        const config = genTestUserSig('user_79441211');
+        this.client = new RTCClient({
+          userId: 'user_79441211',
+          roomId: '889988',
+          sdkAppId: config.sdkAppId,
+          userSig: config.userSig
+        })
+        this.client.join()
+      }
+    }
   }
 </script>
 

@@ -26,13 +26,13 @@ const router = new Router({
       component: resolve => require(['@/page/video'], resolve)
     },
     {
-      path: '/test',
+      path: '/test1',
       name: 'Test',
       meta: {
         title: '视频',
         toolBar: true
       },
-      component: resolve => require(['@/page/test'], resolve)
+      component: resolve => require(['@/page/test1'], resolve)
     }
   ]
 })
