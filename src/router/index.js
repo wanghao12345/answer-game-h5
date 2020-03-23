@@ -15,6 +15,24 @@ const router = new Router({
         toolBar: true
       },
       component: resolve => require(['@/page/home'], resolve)
+    },
+    {
+      path: '/video',
+      name: 'Video',
+      meta: {
+        title: '视频',
+        toolBar: true
+      },
+      component: resolve => require(['@/page/video'], resolve)
+    },
+    {
+      path: '/test',
+      name: 'Test',
+      meta: {
+        title: '视频',
+        toolBar: true
+      },
+      component: resolve => require(['@/page/test'], resolve)
     }
   ]
 })

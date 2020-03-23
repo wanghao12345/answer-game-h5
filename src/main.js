@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import './config/rem'
+// import './config/rem'
 import './assets/iconfont/iconfont.css'
 
 
